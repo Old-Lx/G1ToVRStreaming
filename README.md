@@ -1,0 +1,2 @@
+# G1ToVRStreaming
+This is an interface between Oculus Rift S and robot G1 Edu initially developed during a short exchanged in Krakow 
