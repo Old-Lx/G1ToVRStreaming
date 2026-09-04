@@ -16,7 +16,7 @@ int main() {
     std::signal(SIGINT, InterceptarCtrlC);
 
     // Instanciar el módulo de video con el nuevo nombre de clase
-    stream_video = new emitter("127.0.0.1", "5000", "/dev/video6");
+    stream_video = new emitter("127.0.0.1", "5000", "/dev/video4");
 
     // Iniciar transmisión sin bloquear el programa
     if (!stream_video->Iniciar()) {

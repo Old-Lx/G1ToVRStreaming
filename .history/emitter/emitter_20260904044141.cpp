@@ -18,9 +18,10 @@ emitter::~emitter() {
 bool emitter::Iniciar() {
     if (en_ejecucion) return true;
 
-    // Pipeline flexible: deja que la cámara Intel negocie su propio formato
+    // Pipeline modificado con inyección de 'caps' para hardware Intel RealSense
     std::string pipeline_str = 
         "v4l2src device=" + dispositivo + " ! "
+        "video/x-raw, format=YUY2, width=640, height=480, framerate=30/1 ! "
         "videoconvert ! "
         "x264enc tune=zerolatency speed-preset=ultrafast ! "
         "rtph264pay ! "
@@ -34,6 +35,8 @@ bool emitter::Iniciar() {
         g_clear_error(&error);
         return false;
     }
+
+    // ... resto de la función intacta ...
 
     main_loop = g_main_loop_new(nullptr, FALSE);
     gst_element_set_state(pipeline, GST_STATE_PLAYING);
