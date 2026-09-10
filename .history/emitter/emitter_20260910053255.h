@@ -4,12 +4,6 @@
 #include <thread>
 #include <atomic>
 
-// Definimos los perfiles de hardware soportados
-enum class TipoCamara {
-    WEBCAM_GENERICA,
-    INTEL_REALSENSE
-};
-
 class emitter {
 private:
     GstElement* pipeline;
@@ -20,13 +14,14 @@ private:
     std::string ip_destino;
     std::string puerto;
     std::string dispositivo;
-    TipoCamara tipo_hardware; // Guardamos el perfil seleccionado
 
+    // Método privado que vivirá exclusivamente en el hilo secundario
+    // para no ahogar el hilo principal de control del robot.
     void EjecutarBucle();
 
 public:
-    // El constructor ahora exige que le digas qué tipo de cámara es
-    emitter(const std::string& ip, const std::string& p, const std::string& dev, TipoCamara tipo);
+    // Constructor. Si no se pasa dispositivo, por defecto buscará video0
+    emitter(const std::string& ip, const std::string& p, const std::string& dev = "/dev/video0");
     ~emitter();
 
     bool Iniciar();

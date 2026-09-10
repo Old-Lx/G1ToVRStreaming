@@ -15,9 +15,8 @@ void InterceptarCtrlC(int signum) {
 int main() {
     std::signal(SIGINT, InterceptarCtrlC);
 
-    // En ROS 2, este tipo vendría de: this->declare_parameter<std::string>("camera_type", "realsense");
     // Instanciar el módulo de video con el nuevo nombre de clase
-    stream_video = new emitter("192.168.8.112", "5000", "/dev/video6", TipoCamara::INTEL_REALSENSE); // Ip de la máquina windows con el VR dentro del lab 192.168.8.112 // Creo que en el robot es video 4 o 6
+    stream_video = new emitter("localhost", "5000", "/dev/video6"); // Creo que en el robot es video 4 o 6
 
     // Iniciar transmisión sin bloquear el programa
     if (!stream_video->Iniciar()) {
