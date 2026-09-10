@@ -16,7 +16,7 @@ int main() {
     std::signal(SIGINT, InterceptarCtrlC);
 
     // Instanciar el módulo de video con el nuevo nombre de clase
-    stream_video = new emitter("192.168.8.112", "5000", "/dev/video0"); // Creo que en el robot es video 4 o 6
+    stream_video = new emitter("192.168.8.112", "5000", "/dev/video2"); // Creo que en el robot es video 4 o 6
 
     // Iniciar transmisión sin bloquear el programa
     if (!stream_video->Iniciar()) {
